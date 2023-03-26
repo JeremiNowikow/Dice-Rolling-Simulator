@@ -1,7 +1,7 @@
-# checks if the string inputted by the player is in XDY + Z format
 from random import randint
 
 
+# checks if the string inputted by the player is in XDY + Z format
 def validate_input(input_str: str) -> bool:
     input_str = input_str.lower()
     if input_str.count("d") != 1:
@@ -45,7 +45,7 @@ def get_user_input() -> str:
 # generates a specified amount of random numbers in specified range, summarizes them, and returns the sum
 def generate_roll_result(input_str: str) -> int:
     split_input = input_str.lower().split("d")
-    if split_input[0] == "":
+    if split_input[0] == "":  # if there was no number on the left of "D", the number of dice is set to 1 by default
         dice_amount = 1
     else:
         dice_amount = int(split_input[0])

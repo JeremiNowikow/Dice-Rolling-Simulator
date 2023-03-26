@@ -22,7 +22,7 @@ def validate_input(input_str: str) -> bool:
 
     try:
         # checks if the values in the input are correct by converting them to integers
-        if int(sub_str[0]) <= 0:  # checks if the value on the left of "d" is positive
+        if (sub_str[0] != "") and (int(sub_str[0]) < 1):  # checks if the value on the left of "d" is positive or 0
             return False
         int(sub_str_2[0])
         int(sub_str_2[1])
@@ -45,7 +45,10 @@ def get_user_input() -> str:
 # generates a specified amount of random numbers in specified range, summarizes them, and returns the sum
 def generate_roll_result(input_str: str) -> int:
     split_input = input_str.lower().split("d")
-    dice_amount = int(split_input[0])
+    if split_input[0] == "":
+        dice_amount = 1
+    else:
+        dice_amount = int(split_input[0])
     if "+" in split_input[1]:
         split_input_2 = split_input[1].split("+")
     elif "-" in split_input[1]:
@@ -60,9 +63,9 @@ def generate_roll_result(input_str: str) -> int:
     return sum(rolls) + optional_modifier
 
 
-
-print("Input the dice to roll in xDy format. \n"
+print("Input the dice to roll in xDy format. If you only want to roll 1 die, you can omit the first number \n"
       "Optionally, you can include the number to add/subtract from the final roll as xDy+Z or xDy-Z. \n")
+
 user_input = get_user_input()
 result = generate_roll_result(user_input)
 print(f"Your result: {result}")
